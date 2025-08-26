@@ -1,15 +1,23 @@
-// Example JS for dynamic price updates.
+// Example JS for dynamic price updates and portfolio analytics.
 // In production, replace with AJAX/WebSocket calls to your backend API.
 
 const tickers = ["AAPL", "GOOGL"];
+
+// Enhanced portfolio analytics
+const portfolioAnalytics = {
+    riskLevel: 'Moderate',
+    sharpeRatio: 1.23,
+    volatility: 0.18,
+    beta: 1.05
+};
+
 function mockFetchPrice(symbol) {
-    // Simulate fetching a live price in Euros
-    if (symbol === "AAPL") {
-        return (Math.random() * (200 - 120) + 120).toFixed(2);
-    } else if (symbol === "GOOGL") {
-        return (Math.random() * (2800 - 2400) + 2400).toFixed(2);
-    }
-    return (Math.random() * (300 - 100) + 100).toFixed(2);
+    // Simulate fetching a live price in Euros with more realistic volatility
+    const basePrice = symbol === "AAPL" ? 168.45 : 2634.12;
+    const volatility = 0.01; // Reduce volatility to 1%
+    const change = (Math.random() - 0.5) * 2 * volatility;
+    const newPrice = basePrice * (1 + change);
+    return Math.max(newPrice, basePrice * 0.95).toFixed(2); // Don't let it drop below 95% of base
 }
 
 function updatePrices() {
@@ -17,8 +25,9 @@ function updatePrices() {
         const price = mockFetchPrice(symbol);
         const priceElement = document.getElementById(`price-${symbol}`);
         if (priceElement) {
+            // Format large numbers with commas for readability
             const formattedPrice = parseFloat(price) >= 1000 ? 
-                `€${parseFloat(price).toLocaleString('de-DE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}` : 
+                `€${parseFloat(price).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}` : 
                 `€${price}`;
             priceElement.innerText = formattedPrice;
         }
@@ -26,15 +35,39 @@ function updatePrices() {
         // Update trading analysis current prices
         const currentPriceElement = document.querySelector(`.current-price[data-ticker="${symbol}"]`);
         if (currentPriceElement) {
+            // Format large numbers with commas for readability
             const formattedPrice = parseFloat(price) >= 1000 ? 
-                `€${parseFloat(price).toLocaleString('de-DE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}` : 
+                `€${parseFloat(price).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}` : 
                 `€${price}`;
             currentPriceElement.innerText = formattedPrice;
+            // Store raw price as data attribute for calculations
+            currentPriceElement.setAttribute('data-price', price);
         }
     });
     
     // Update trading analysis after price changes
     updateTradingAnalysis();
+    
+    // Update additional KPIs
+    updatePortfolioAnalytics();
+}
+
+// Update additional portfolio analytics
+function updatePortfolioAnalytics() {
+    // Add some variability to the analytics
+    const riskLevelElement = document.getElementById('risk-level');
+    const sharpeRatioElement = document.getElementById('sharpe-ratio');
+    
+    if (riskLevelElement) {
+        riskLevelElement.textContent = portfolioAnalytics.riskLevel;
+    }
+    
+    if (sharpeRatioElement) {
+        // Add slight variation to Sharpe ratio
+        const variation = (Math.random() - 0.5) * 0.1;
+        const newSharpe = Math.max(0, portfolioAnalytics.sharpeRatio + variation);
+        sharpeRatioElement.textContent = newSharpe.toFixed(2);
+    }
 }
 
 // Calculator Functions
@@ -108,8 +141,12 @@ function updateTradingAnalysis() {
         
         const shares = parseFloat(sharesInput.value) || 0;
         const purchasePrice = parseFloat(purchaseInput.value) || 0;
-        const currentPriceText = currentPriceCell.textContent.replace('€', '').replace(',', '');
-        const currentPrice = parseFloat(currentPriceText) || 0;
+        // Try to get raw price from data attribute first, then parse formatted text
+        let currentPrice = parseFloat(currentPriceCell.getAttribute('data-price')) || 0;
+        if (!currentPrice) {
+            const currentPriceText = currentPriceCell.textContent.replace('€', '').replace(/,/g, '');
+            currentPrice = parseFloat(currentPriceText) || 0;
+        }
         
         const totalValue = shares * currentPrice;
         const cost = shares * purchasePrice;
@@ -163,6 +200,7 @@ function updateTradingAnalysis() {
 document.addEventListener('DOMContentLoaded', function() {
     setupCalculators();
     updateTradingAnalysis();
+    updatePortfolioAnalytics();
     
     // Poll every 10 seconds (demo)
     setInterval(updatePrices, 10000);

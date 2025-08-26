@@ -31,12 +31,12 @@ header {
 }
 
 main {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 2rem auto;
     padding: 1rem;
 }
 
-.kpi-section, .prices-section, .calculator-section, .trading-section {
+.kpi-section, .prices-section, .calculator-section, .trading-section, .charts-section, .bank-section {
     margin-bottom: 2rem;
 }
 
@@ -269,6 +269,80 @@ footer {
     color: var(--accent);
 }
 
+/* Charts Section Styles */
+.charts-section {
+    margin-bottom: 3rem;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.chart-container {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.chart-container h3 {
+    margin: 0 0 1rem 0;
+    color: var(--primary);
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.chart-wrapper {
+    position: relative;
+    height: 300px;
+}
+
+/* Bank Section Styles */
+.bank-section {
+    margin-bottom: 3rem;
+}
+
+.bank-kpis {
+    margin-bottom: 2rem;
+}
+
+.bank-chart-container {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.bank-chart-container h3 {
+    margin: 0 0 1rem 0;
+    color: var(--primary);
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.bank-chart-container .chart-wrapper {
+    position: relative;
+    height: 400px;
+}
+
+@media (max-width: 900px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .chart-wrapper {
+        height: 250px;
+    }
+    
+    .bank-chart-container .chart-wrapper {
+        height: 300px;
+    }
+}
+
 @media (max-width: 600px) {
     main {
         padding: 0.5rem;
@@ -298,5 +372,17 @@ footer {
     }
     .shares-input input, .purchase-input input {
         width: 55px;
+    }
+    
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .chart-wrapper {
+        height: 200px;
+    }
+    
+    .bank-chart-container .chart-wrapper {
+        height: 250px;
     }
 }
