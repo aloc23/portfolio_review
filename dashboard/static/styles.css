@@ -1,0 +1,302 @@
+:root {
+    --primary: #2c3e50;
+    --secondary: #18bc9c;
+    --background: #f5f5f5;
+    --card-bg: #fff;
+    --accent: #e74c3c;
+    --border-radius: 10px;
+    --shadow: 0 2px 8px rgba(44, 62, 80, 0.07);
+    --font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--background);
+    font-family: var(--font-family);
+    color: var(--primary);
+}
+
+header {
+    background: var(--primary);
+    color: #fff;
+    padding: 2rem 1rem 1rem 1rem;
+    text-align: center;
+}
+
+.subtitle {
+    color: var(--secondary);
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.kpi-section, .prices-section, .calculator-section, .trading-section {
+    margin-bottom: 2rem;
+}
+
+.kpi-list {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.kpi-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.2rem 2rem;
+    box-shadow: var(--shadow);
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.kpi-title {
+    font-size: 1.1rem;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+}
+
+.kpi-value {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.prices-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.prices-table th, .prices-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.prices-table th {
+    background: var(--secondary);
+    color: #fff;
+}
+
+.prices-table tr:last-child td {
+    border-bottom: none;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    background: var(--primary);
+    color: #fff;
+    margin-top: 2rem;
+}
+
+/* Calculator Styles */
+.calculator-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.calculator-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.calculator-card h3 {
+    margin: 0 0 1rem 0;
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+.calc-input-group {
+    margin-bottom: 1rem;
+}
+
+.calc-input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.calc-input-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.calc-input-group input:focus {
+    outline: none;
+    border-color: var(--secondary);
+}
+
+.calc-result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 1rem;
+}
+
+.calc-label {
+    font-weight: 500;
+    color: var(--primary);
+}
+
+.calc-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--secondary);
+}
+
+.calc-value.positive {
+    color: #27ae60;
+}
+
+.calc-value.negative {
+    color: var(--accent);
+}
+
+/* Trading Analysis Styles */
+.trading-table-container {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+.trading-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    min-width: 800px;
+}
+
+.trading-table th, .trading-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.trading-table th {
+    background: var(--secondary);
+    color: #fff;
+    font-weight: 600;
+}
+
+.trading-table tr:last-child td {
+    border-bottom: none;
+}
+
+.trading-table input {
+    width: 80px;
+    padding: 0.25rem;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.shares-input input, .purchase-input input {
+    width: 70px;
+}
+
+.profit-loss.positive, .change-percent.positive {
+    color: #27ae60;
+    font-weight: 600;
+}
+
+.profit-loss.negative, .change-percent.negative {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.portfolio-summary {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.summary-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1rem 1.5rem;
+    box-shadow: var(--shadow);
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.summary-title {
+    font-size: 0.9rem;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.summary-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.summary-value.profit-loss.positive {
+    color: #27ae60;
+}
+
+.summary-value.profit-loss.negative {
+    color: var(--accent);
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 0.5rem;
+    }
+    .kpi-list {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .kpi-card {
+        padding: 1rem;
+        min-width: 100%;
+    }
+    .calculator-grid {
+        grid-template-columns: 1fr;
+    }
+    .portfolio-summary {
+        flex-direction: column;
+    }
+    .summary-card {
+        min-width: 100%;
+    }
+    .trading-table-container {
+        font-size: 0.9rem;
+    }
+    .trading-table input {
+        width: 60px;
+    }
+    .shares-input input, .purchase-input input {
+        width: 55px;
+    }
+}

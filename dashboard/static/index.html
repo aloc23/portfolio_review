@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio Review Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Portfolio Review</h1>
+        <p class="subtitle">Live Share Prices & KPIs</p>
+    </header>
+    <main>
+        <section class="kpi-section">
+            <h2>Key Performance Indicators</h2>
+            <div class="kpi-list">
+                <div class="kpi-card">
+                    <span class="kpi-title">Portfolio Value</span>
+                    <span class="kpi-value" id="portfolio-value">€123,456</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-title">ROI</span>
+                    <span class="kpi-value" id="roi">12.5%</span>
+                </div>
+            </div>
+        </section>
+        <section class="calculator-section">
+            <h2>KPI Calculator</h2>
+            <div class="calculator-grid">
+                <div class="calculator-card">
+                    <h3>Investment Calculator</h3>
+                    <div class="calc-input-group">
+                        <label for="investment-amount">Investment Amount (€)</label>
+                        <input type="number" id="investment-amount" placeholder="1000" step="0.01">
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="share-price">Share Price (€)</label>
+                        <input type="number" id="share-price" placeholder="150" step="0.01">
+                    </div>
+                    <div class="calc-result">
+                        <span class="calc-label">Shares You Can Buy:</span>
+                        <span class="calc-value" id="shares-result">0</span>
+                    </div>
+                </div>
+                <div class="calculator-card">
+                    <h3>Profit/Loss Calculator</h3>
+                    <div class="calc-input-group">
+                        <label for="shares-owned">Shares Owned</label>
+                        <input type="number" id="shares-owned" placeholder="10" step="1">
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="purchase-price">Purchase Price (€)</label>
+                        <input type="number" id="purchase-price" placeholder="150" step="0.01">
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="current-price">Current Price (€)</label>
+                        <input type="number" id="current-price" placeholder="168" step="0.01">
+                    </div>
+                    <div class="calc-result">
+                        <span class="calc-label">Profit/Loss:</span>
+                        <span class="calc-value" id="profit-loss-result">€0.00</span>
+                    </div>
+                    <div class="calc-result">
+                        <span class="calc-label">ROI:</span>
+                        <span class="calc-value" id="roi-result">0%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="trading-section">
+            <h2>Trading Analysis</h2>
+            <div class="trading-table-container">
+                <table class="trading-table">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Shares Owned</th>
+                            <th>Purchase Price</th>
+                            <th>Current Price</th>
+                            <th>Total Value</th>
+                            <th>Profit/Loss</th>
+                            <th>Change %</th>
+                        </tr>
+                    </thead>
+                    <tbody id="trading-table-body">
+                        <tr>
+                            <td>AAPL</td>
+                            <td class="shares-input"><input type="number" value="10" onchange="updateTradingAnalysis()" min="0"></td>
+                            <td class="purchase-input">€<input type="number" value="150.00" onchange="updateTradingAnalysis()" step="0.01" min="0"></td>
+                            <td class="current-price" data-ticker="AAPL">€168.45</td>
+                            <td class="total-value">€1,684.50</td>
+                            <td class="profit-loss positive">€184.50</td>
+                            <td class="change-percent positive">12.30%</td>
+                        </tr>
+                        <tr>
+                            <td>GOOGL</td>
+                            <td class="shares-input"><input type="number" value="2" onchange="updateTradingAnalysis()" min="0"></td>
+                            <td class="purchase-input">€<input type="number" value="2500.00" onchange="updateTradingAnalysis()" step="0.01" min="0"></td>
+                            <td class="current-price" data-ticker="GOOGL">€2,634.12</td>
+                            <td class="total-value">€5,268.24</td>
+                            <td class="profit-loss positive">€268.24</td>
+                            <td class="change-percent positive">5.36%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="portfolio-summary">
+                <div class="summary-card">
+                    <span class="summary-title">Total Portfolio Value</span>
+                    <span class="summary-value" id="total-portfolio-value">€6,952.74</span>
+                </div>
+                <div class="summary-card">
+                    <span class="summary-title">Total Profit/Loss</span>
+                    <span class="summary-value profit-loss positive" id="total-profit-loss">€452.74</span>
+                </div>
+                <div class="summary-card">
+                    <span class="summary-title">Portfolio ROI</span>
+                    <span class="summary-value" id="portfolio-roi">6.98%</span>
+                </div>
+            </div>
+        </section>
+        <section class="prices-section">
+            <h2>Live Share Prices</h2>
+            <table class="prices-table">
+                <thead>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody id="prices-table-body">
+                    <tr>
+                        <td>AAPL</td>
+                        <td id="price-AAPL">€168.45</td>
+                    </tr>
+                    <tr>
+                        <td>GOOGL</td>
+                        <td id="price-GOOGL">€2,634.12</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <small>Portfolio Review &copy; 2025</small>
+    </footer>
+    <script src="live_prices.js"></script>
+</body>
+</html>
