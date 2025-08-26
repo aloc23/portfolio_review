@@ -9,19 +9,43 @@
 <body>
     <header>
         <h1>Portfolio Review</h1>
-        <p class="subtitle">Live Share Prices & KPIs</p>
+        <p class="subtitle">Comprehensive Investment Portfolio & Bank Performance Analysis</p>
     </header>
     <main>
         <section class="kpi-section">
-            <h2>Key Performance Indicators</h2>
+            <h2>Portfolio Key Performance Indicators</h2>
             <div class="kpi-list">
                 <div class="kpi-card">
                     <span class="kpi-title">Portfolio Value</span>
                     <span class="kpi-value" id="portfolio-value">€123,456</span>
                 </div>
                 <div class="kpi-card">
-                    <span class="kpi-title">ROI</span>
+                    <span class="kpi-title">Portfolio ROI</span>
                     <span class="kpi-value" id="roi">12.5%</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-title">Risk Level</span>
+                    <span class="kpi-value" id="risk-level">Moderate</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-title">Sharpe Ratio</span>
+                    <span class="kpi-value" id="sharpe-ratio">1.23</span>
+                </div>
+            </div>
+        </section>
+        <section class="charts-section">
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3>Asset Allocation</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="assetAllocationChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>Portfolio Performance vs Benchmark</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
                 </div>
             </div>
         </section>
@@ -69,7 +93,7 @@
             </div>
         </section>
         <section class="trading-section">
-            <h2>Trading Analysis</h2>
+            <h2>Holdings Analysis</h2>
             <div class="trading-table-container">
                 <table class="trading-table">
                     <thead>
@@ -120,6 +144,47 @@
                 </div>
             </div>
         </section>
+        <section class="bank-section">
+            <h2>Bank Performance Analysis</h2>
+            <div class="bank-kpis">
+                <div class="kpi-list">
+                    <div class="kpi-card">
+                        <span class="kpi-title">Total Assets</span>
+                        <span class="kpi-value" id="bank-total-assets">€1.25B</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-title">Deposits</span>
+                        <span class="kpi-value" id="bank-deposits">€980M</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-title">Loans</span>
+                        <span class="kpi-value" id="bank-loans">€850M</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-title">Equity</span>
+                        <span class="kpi-value" id="bank-equity">€125M</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-title">ROA</span>
+                        <span class="kpi-value" id="bank-roa">1.2%</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-title">ROE</span>
+                        <span class="kpi-value" id="bank-roe">12.5%</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-title">Tier 1 Ratio</span>
+                        <span class="kpi-value" id="bank-tier1-ratio">14.8%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bank-chart-container">
+                <h3>Bank Financials Trend</h3>
+                <div class="chart-wrapper">
+                    <canvas id="bankFinancialsChart"></canvas>
+                </div>
+            </div>
+        </section>
         <section class="prices-section">
             <h2>Live Share Prices</h2>
             <table class="prices-table">
@@ -143,8 +208,25 @@
         </section>
     </main>
     <footer>
-        <small>Portfolio Review &copy; 2025</small>
+        <small>Portfolio Review &copy; 2025 - Comprehensive Investment Portfolio & Bank Performance Analysis</small>
     </footer>
     <script src="live_prices.js"></script>
+    <script src="dashboard.js"></script>
+    <script>
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize existing functionality
+            setupCalculators();
+            updateTradingAnalysis();
+            
+            // Initialize new dashboard charts
+            setTimeout(() => {
+                window.dashboardCharts.init();
+            }, 100);
+            
+            // Start price updates
+            setInterval(updatePrices, 10000);
+        });
+    </script>
 </body>
 </html>
