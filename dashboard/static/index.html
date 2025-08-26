@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio Review Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Portfolio Review</h1>
+        <p class="subtitle">Live Share Prices & KPIs</p>
+    </header>
+    <main>
+        <section class="kpi-section">
+            <h2>Key Performance Indicators</h2>
+            <div class="kpi-list">
+                <div class="kpi-card">
+                    <span class="kpi-title">Portfolio Value</span>
+                    <span class="kpi-value" id="portfolio-value">$123,456</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-title">ROI</span>
+                    <span class="kpi-value" id="roi">12.5%</span>
+                </div>
+            </div>
+        </section>
+        <section class="prices-section">
+            <h2>Live Share Prices</h2>
+            <table class="prices-table">
+                <thead>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody id="prices-table-body">
+                    <tr>
+                        <td>AAPL</td>
+                        <td id="price-AAPL">$181.12</td>
+                    </tr>
+                    <tr>
+                        <td>GOOGL</td>
+                        <td id="price-GOOGL">$2,826.23</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <small>Portfolio Review &copy; 2025</small>
+    </footer>
+    <script src="live_prices.js"></script>
+</body>
+</html>
