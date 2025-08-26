@@ -25,13 +25,23 @@ function updatePrices() {
         const price = mockFetchPrice(symbol);
         const priceElement = document.getElementById(`price-${symbol}`);
         if (priceElement) {
-            priceElement.innerText = `€${price}`;
+            // Format large numbers with commas for readability
+            const formattedPrice = parseFloat(price) >= 1000 ? 
+                `€${parseFloat(price).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}` : 
+                `€${price}`;
+            priceElement.innerText = formattedPrice;
         }
         
         // Update trading analysis current prices
         const currentPriceElement = document.querySelector(`.current-price[data-ticker="${symbol}"]`);
         if (currentPriceElement) {
-            currentPriceElement.innerText = `€${price}`;
+            // Format large numbers with commas for readability
+            const formattedPrice = parseFloat(price) >= 1000 ? 
+                `€${parseFloat(price).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}` : 
+                `€${price}`;
+            currentPriceElement.innerText = formattedPrice;
+            // Store raw price as data attribute for calculations
+            currentPriceElement.setAttribute('data-price', price);
         }
     });
     
@@ -131,8 +141,12 @@ function updateTradingAnalysis() {
         
         const shares = parseFloat(sharesInput.value) || 0;
         const purchasePrice = parseFloat(purchaseInput.value) || 0;
-        const currentPriceText = currentPriceCell.textContent.replace('€', '').replace(/\./g, '').replace(',', '.');
-        const currentPrice = parseFloat(currentPriceText) || 0;
+        // Try to get raw price from data attribute first, then parse formatted text
+        let currentPrice = parseFloat(currentPriceCell.getAttribute('data-price')) || 0;
+        if (!currentPrice) {
+            const currentPriceText = currentPriceCell.textContent.replace('€', '').replace(/,/g, '');
+            currentPrice = parseFloat(currentPriceText) || 0;
+        }
         
         const totalValue = shares * currentPrice;
         const cost = shares * purchasePrice;
